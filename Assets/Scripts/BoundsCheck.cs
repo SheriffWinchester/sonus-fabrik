@@ -4,33 +4,33 @@ using UnityEngine;
 
 public class BoundsCheck : MonoBehaviour
 {
-    public GameObject thisObject, m_NewObject;
-    Collider2D thisCollider, m_Collider2;
-    Vector3 snapPosition = new Vector3(-2, 3, 0);
-    GameObject factorySlot;
+    GameObject thisObject;
+    public GameObject slotObject;
+    Collider2D thisCollider;
     Collider2D factorySlotCollider;
+    Vector3 test = new Vector3(3, 3, 3);
+    BlockClickMove blockClickMove;
 
     void Start() 
     {
-            thisCollider = gameObject.GetComponent<Collider2D>();
-            factorySlot = GameObject.FindGameObjectWithTag("FactorySlot");
-            factorySlotCollider = factorySlot.GetComponent<Collider2D>();
+            thisCollider = GetComponent<Collider2D>();
+            factorySlotCollider = slotObject.GetComponent<Collider2D>();
     }
 
-    void Update() {
-        void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Collision " + collision.gameObject.name);
+        if (collision.gameObject.tag == "FactorySlot")
         {
-            if (collision.gameObject.tag == "FactorySlot")
-            {
-                Debug.Log(collision.gameObject.name);
-                gameObject.transform.position = collision.transform.position;
-            }
+            blockClickMove.isDragged = false;
+            transform.position = collision.transform.position;
         }
-        // if (thisCollider.bounds.Intersects(factorySlotCollider.bounds)) 
-        // {
-        //     //m_Collider2.transform.position = factorySlot.transform.position;
-        //     Debug.Log(factorySlotCollider.name);
-        // }
-        
     }
+    // void Update() {
+    //     if (factorySlotCollider.bounds.Intersects(thisCollider.bounds)) 
+    //     {
+    //         thisCollider.transform.position = factorySlotCollider.transform.position;
+    //         Debug.Log(factorySlotCollider.name);
+    //     }
+    // }  
 }

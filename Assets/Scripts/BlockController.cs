@@ -45,7 +45,7 @@ public class BlockController : MonoBehaviour
         {
             childCurrent[k].transform.GetComponent<BlockState>().isActive = false;
             childCurrent[i].transform.GetComponent<BlockState>().isActive = true;
-            Debug.Log("Active " + i);
+            //Debug.Log("Active " + i);
             nextTime = currentTime + currentBeatTime;
 
             k = i;

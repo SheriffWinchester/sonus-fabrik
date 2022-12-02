@@ -4,26 +4,30 @@ using UnityEngine;
 
 public class BlockClickMove : MonoBehaviour
 {   
-    public GameObject selectedObject;
+    GameObject selectedObject;
     Vector3 offset;
+
+    [SerializeField] public bool isDragged;
     void Update()
     {
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
         {
             Collider2D targetObject = Physics2D.OverlapPoint(mousePosition);
-            Debug.Log(targetObject);
+            //Debug.Log(targetObject);
             if (targetObject)
             {
                 selectedObject = targetObject.transform.gameObject;
                 offset = selectedObject.transform.position - mousePosition;
-                Debug.Log("Yes");
+                
+                isDragged = true;
 
             }
         }
         if (Input.GetMouseButtonUp(0) && selectedObject)
         {
             selectedObject = null;
+            isDragged = false;
         }
         if (selectedObject) 
         {
