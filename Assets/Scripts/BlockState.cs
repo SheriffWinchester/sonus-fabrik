@@ -3,21 +3,32 @@ using System.Collections;
 
 public class BlockState : MonoBehaviour
 {
-
-    public bool isActive = false;
+    public bool isActive;
+    public bool isPlayed;
     SpriteRenderer childColor;
     AudioSource audioSrc;
-    void Start() {
+    public AudioClip audioClip;
+    void Start() 
+    {
         childColor = GetComponent<SpriteRenderer>();
         audioSrc = GetComponent<AudioSource>();
     }
 
-    void Update() {
-        if (isActive) {
-            audioSrc.Play();
-            childColor.color = Color.green;
+    void Update() 
+    {
+        if (isActive) 
+        {
+            if (isPlayed)
+            {
+                if (!audioSrc.isPlaying)
+                {
+                    audioSrc.Play();
+                }
+                childColor.color = Color.green;
+            }
         }
-        else {
+        else 
+        {
             childColor.color = Color.white;
         }
     }

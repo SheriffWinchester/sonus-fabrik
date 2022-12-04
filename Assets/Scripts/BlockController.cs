@@ -3,26 +3,12 @@ using System.Collections;
 
 public class BlockController : MonoBehaviour
 {
-
-    //GameObject tile;
-    //Component[] tiles;
-    //AudioSource audioSrc;
-    Transform[] childCurrent = new Transform[3];
-    Transform[] childNext = new Transform[3];
-    SpriteRenderer[] childColor = new SpriteRenderer[3];
-    //public Camera renderCamera;
-    //public GameObject lastHit;
-    public Vector3 huy;
-    //Transform[] transforms = this.GetComponentsInChildren<Transform>();
-
-    bool statusSequencer = true;
+    Transform[] childCurrent = new Transform[16];
+    SpriteRenderer[] childColor = new SpriteRenderer[16];
     public float bpm = 60;
-    float currentBeatTime;
-
-    float currentTime;
+    float currentTime, currentBeatTime;
     float nextTime = 0;
-    int i = 0;
-    int k = 0;
+    int i, k = 0;
     void Start()
     { 
         //Get access to the tiles  
@@ -30,27 +16,24 @@ public class BlockController : MonoBehaviour
             childCurrent[i] = transform.GetChild(i);
             childColor[i] = childCurrent[i].transform.GetComponent<SpriteRenderer>();
         }    
-        childCurrent.CopyTo(childNext, 0);
-        //audioSrc = GetComponent<AudioSource>();
-        // if (statusSequencer) {
-        //     StartCoroutine(SequencePlay());
-        // }
     }
-
     void Update() {
         currentBeatTime = 60 / bpm;
         currentTime = Time.time;  
-        
+        //Step sequencing
         if (currentTime >= nextTime && i < childCurrent.Length)
         {
+            //Swap magic of elements
             childCurrent[k].transform.GetComponent<BlockState>().isActive = false;
             childCurrent[i].transform.GetComponent<BlockState>().isActive = true;
-            //Debug.Log("Active " + i);
+
             nextTime = currentTime + currentBeatTime;
 
             k = i;
             i++;
         }
+
+        //When reached to the end of the array - return to the start
         if (i == childCurrent.Length)
         {
             i = 0;
