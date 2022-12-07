@@ -8,6 +8,7 @@ public class BlockState : MonoBehaviour
     SpriteRenderer childColor;
     AudioSource audioSrc;
     public AudioClip audioClip;
+    int i = 0;
     void Start() 
     {
         childColor = GetComponent<SpriteRenderer>();
@@ -20,9 +21,10 @@ public class BlockState : MonoBehaviour
         {
             if (isPlayed)
             {
-                if (!audioSrc.isPlaying)
+                if (audioSrc.isPlaying == false && i < 1) 
                 {
-                    audioSrc.Play();
+                    audioSrc.PlayOneShot(audioClip);
+                    i++;
                 }
                 childColor.color = Color.green;
             }
@@ -30,6 +32,7 @@ public class BlockState : MonoBehaviour
         else 
         {
             childColor.color = Color.white;
+            i = 0;
         }
     }
 

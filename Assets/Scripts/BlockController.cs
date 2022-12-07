@@ -4,6 +4,7 @@ using System.Collections;
 public class BlockController : MonoBehaviour
 {
     Transform[] childCurrent = new Transform[16];
+    Transform childIsPlaying;
     SpriteRenderer[] childColor = new SpriteRenderer[16];
     public float bpm = 60;
     float currentTime, currentBeatTime;
@@ -26,6 +27,8 @@ public class BlockController : MonoBehaviour
             //Swap magic of elements
             childCurrent[k].transform.GetComponent<BlockState>().isActive = false;
             childCurrent[i].transform.GetComponent<BlockState>().isActive = true;
+
+            childIsPlaying = childCurrent[i];
 
             nextTime = currentTime + currentBeatTime;
 
