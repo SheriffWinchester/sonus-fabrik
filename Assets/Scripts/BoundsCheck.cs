@@ -20,7 +20,7 @@ public class BoundsCheck : MonoBehaviour
     {
         factorySlotCollider = collision;
         slotPosition = collision.transform.position;
-        Debug.Log("Collision " + collision.gameObject.name);
+        //Debug.Log("Collision " + collision.gameObject.name);
     }
 
     //Check whether objects intersect after colliding, then move its position
